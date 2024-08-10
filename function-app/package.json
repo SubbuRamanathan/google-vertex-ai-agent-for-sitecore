@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.2",
+    "@google-cloud/vertexai": "^1.4.1"
+  },
+  "scripts": {
+    "start": "functions-framework --target=search"
+  }
+}
