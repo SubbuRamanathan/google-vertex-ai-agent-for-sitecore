@@ -68,11 +68,11 @@ functions.http('search', async(req, res) => {
     };
 
     async function generateKnowledgeBaseResponse() {
-        const projectId = credentials.find(keyFilter('project_id'));
+        const projectId = credentials.project_id;
         let config = {
             credentials: {
-                private_key: credentials.find(keyFilter('private_key')),
-                client_email: credentials.find(keyFilter('client_email'))
+                private_key: credentials.private_key,
+                client_email: credentials.client_email
             }
         }
 
