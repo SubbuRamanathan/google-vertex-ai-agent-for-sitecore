@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@google-cloud/dialogflow-cx": "^4.8.0",
     "@google-cloud/functions-framework": "^3.4.2",
-    "@google-cloud/vertexai": "^1.4.1"
+    "@google-cloud/vertexai": "^1.4.1",
+    "google-auth-library": "^9.13.0"
   },
   "scripts": {
     "start": "functions-framework --target=search"
