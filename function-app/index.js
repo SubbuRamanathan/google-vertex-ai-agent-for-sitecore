@@ -7,18 +7,17 @@ const location = 'global';
 const agentId = '7dacca07-382c-4f99-aac5-e97b595df7c1';
 
 const credentials = require('./key.json');
-const keyFilter = (key) => (item) => (item.key === key);
 
 functions.http('search', async(req, res) => {
     console.log(`Logged Message: ${JSON.stringify(req.headers)} "|||" ${JSON.stringify(req.body)}`);
-    const sessionId = 'dfMessenger-69f4b4c4-b76c-4351-bbb3-657c1ab090ca';
-    const query = 'what are the latest trends in fashion clothing';
+    const sessionId = 'dfMessenger-8b34ab8b-e488-4d8b-9a01-722a16c9389e';
+    const query = 'what are the latest trends in fashion clothing? how can I maintain the clothes during winter?';
 
     // Initialize Vertex with your Cloud project and location
     const vertex_ai = new VertexAI({ project: 'vertex-ai-demo-430916', location: 'us-central1' });
     const model = 'gemini-1.5-flash-001';
 
-    const textsi_1 = { text: `You\'re a helpful customer service chatbot that responds back to any user\'s query related only to fashion clothing, ski tools, and electronic accessories like iPhones from the public internet search only if the user\'s question or parts of the question require online public data search. For example, if the user asks \'what should I buy if travelling to Amazon forest\', then you should do a public Google search for \'kinds of clothing, electronic accessories, ski tools required for travelling to Amazon forest\' and respond back with the search results summary.` };
+    const textsi_1 = { text: `You're a helpful bot that analyzes the users question and website bot's response supplied in json format, and respond back with only the question(s) or parts of the question(s) which is unanswered without any additional details or explanation.`};
 
     // Instantiate the models
     const generativeModel = vertex_ai.preview.getGenerativeModel({
@@ -46,21 +45,14 @@ functions.http('search', async(req, res) => {
                 'threshold': 'BLOCK_MEDIUM_AND_ABOVE'
             }
         ],
-        tools: [
-            {
-                googleSearchRetrieval: {
-                    disableAttribution: false,
-                },
-            },
-        ],
         systemInstruction: {
             parts: [textsi_1]
         },
     });
 
-    async function fetchSearchResults() {
+    async function fetchSearchResults(agentResponse) {
         const request = {
-            contents: [{ role: 'user', parts: [{ text: query }] }],
+            contents: [{ role: 'user', parts: [{ text: `{"question": "${query}", "websiteBotResponse": "${agentResponse}"}  }` }] }],
         };
         const result = await generativeModel.generateContent(request);
         const response = result.response;
@@ -86,23 +78,25 @@ functions.http('search', async(req, res) => {
           );
 
         const request = {
-        session: sessionPath,
-        queryInput: {
-            text: { text: query },
-            languageCode: languageCode,
-        }
+            session: sessionPath,
+            queryInput: {
+                text: { text: query },
+                languageCode: languageCode,
+            }
         };
 
         const knowledgeConnectorResponse = await sessionClient.detectIntent(request);
         return knowledgeConnectorResponse[0].queryResult.responseMessages[0].text.text[0];
     }
 
-    let searchResults = await fetchSearchResults();
-    let renderedContent = searchResults.candidates[0].groundingMetadata.searchEntryPoint.renderedContent;
     let agentResponse = await generateKnowledgeBaseResponse();
+    let searchResults = await fetchSearchResults(agentResponse);
+    let searchResponse = searchResults.candidates[0].content.parts[0].text;
+    let renderedContent = searchResults.candidates[0].groundingMetadata.searchEntryPoint.renderedContent;
     let response = {
         fulfillmentMessages: {
-            searchResultContent: renderedContent,
+            searchResponse: searchResponse,
+            searchRenderedContent: renderedContent,
             agentResponse: agentResponse
         }
     };
