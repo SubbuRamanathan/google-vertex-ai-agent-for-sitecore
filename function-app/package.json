@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@google-cloud/dialogflow-cx": "^4.8.0",
     "@google-cloud/functions-framework": "^3.4.2",

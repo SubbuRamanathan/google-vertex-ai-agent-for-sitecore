@@ -4,10 +4,22 @@
       "name": "Deploy Cloud Function",
       "type": "cloudcode.cloudfunctions",
       "request": "launch",
+      "functionName": "perform-internet-search",
+      "gen": "GEN_2",
+      "revision": "perform-internet-search-00005-say",
+      "entryPoint": "search",
+      "testInput": "",
+      "region": "us-central1",
+      "runtime": "nodejs20"
+    },
+    {
+      "name": "Deploy Cloud Function",
+      "type": "cloudcode.cloudfunctions",
+      "request": "launch",
       "functionName": "perform-public-internet-search",
       "region": "us-central1",
       "gen": "GEN_2",
-      "revision": "perform-public-internet-search-00005-bup",
+      "revision": "perform-public-internet-search-00012-taw",
       "entryPoint": "search",
       "runtime": "nodejs20",
       "testInput": ""
