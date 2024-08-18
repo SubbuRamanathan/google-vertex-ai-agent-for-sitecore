@@ -67,9 +67,10 @@ async function generateModelResponse(instructions, query, isPublicSearchGroundin
 };
 
 export const getUnansweredQueries = async (knowledgeBaseResponse, credentials) => {
-    let instruction = `You're a helpful bot that analyzes the users question and website bot's response supplied in json format, and respond back with only the question(s) or parts of the question(s) which is unanswered in this exact format, "{question: '<unanswered questions/parts goes here>', reason: '<reason for why you think these questions/parts are unanswered>'}". If there are no unanswered questions/parts, then send an empty response.`;
+    let instruction = `You're a helpful bot that analyzes the users question and website bot's response supplied in json format, and respond back with only the question(s) or parts of the question(s) which is unanswered by the website bot in this exact format without any prefix or suffix, "{'question' : '<unanswered questions/parts goes here>', 'reason' : '<reason for why you think these questions/parts are unanswered>'}". If there are no unanswered questions/parts, then send an empty response.`;
     let result = await generateModelResponse(instruction, knowledgeBaseResponse, false, credentials);
-    return JSON.parse(result.response.candidates[0].content.parts[0].text).question;
+    console.log(`Generative Model Response: ${JSON.stringify(result.response.candidates[0].content.parts[0].text)}`)
+    return JSON.parse(result.response.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, '')).question;
 }
 
 export const getInternetSearchGroundedResponse = async (query, credentials) => {
