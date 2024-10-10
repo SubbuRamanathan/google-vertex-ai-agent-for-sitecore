@@ -1,0 +1,20 @@
+{
+  "namespace": "VertexAIAgentBuilder",
+  "references": [ "" ],
+  "items": {
+    "includes": [
+      {
+        "name": "system",
+        "path": "/sitecore/system/Modules/PowerShell/Script Library/Vertex AI Agent Builder",
+        "allowedPushOperations": "createUpdateAndDelete",
+        "scope": "itemAndDescendants"
+      },
+      {
+        "name": "templates",
+        "path": "/sitecore/templates/Modules/Vertex AI Agent Builder",
+        "allowedPushOperations": "createUpdateAndDelete",
+        "scope": "itemAndDescendants"
+      }
+    ]
+  }
+}
