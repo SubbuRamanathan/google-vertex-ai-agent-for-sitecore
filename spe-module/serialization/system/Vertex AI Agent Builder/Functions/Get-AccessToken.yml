@@ -1,0 +1,82 @@
+﻿---
+ID: "26d96374-7257-4a65-904b-372a2cb6e4be"
+Parent: "145ef5cf-3185-4163-8b4b-9cfaa35c98ed"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: "/sitecore/system/Modules/PowerShell/Script Library/Vertex AI Agent Builder/Functions/Get-AccessToken"
+SharedFields:
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    function Get-AccessToken {
+        $settings = Get-Item -Path "master:" -ID "{466BDBB7-CC45-415C-A108-6807F68498EA}"
+        $scope = "https://www.googleapis.com/auth/cloud-platform"
+        $expirationSeconds = 3600
+        $certificateFilePath = "$($AppPath)sitecore modules\PowerShell\Vertex AI Agent Builder\$($settings.CertificateFileName)"
+    
+        $certificate = [System.Security.Cryptography.X509Certificates.X509Certificate2]::new($certificateFilePath, $settings.CertificatePassword, [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable)
+        $rsaCryptoServiceProvider = New-Object System.Security.Cryptography.RSACryptoServiceProvider
+        $rsaCryptoServiceProvider.ImportParameters($certificate.PrivateKey.ExportParameters($true))
+        
+        $jwtHeader = '{"alg":"RS256","typ":"JWT"}'
+        $jwtHeaderBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($jwtHeader))
+        $jwtHeaderBase64UrlEncoded = $jwtHeaderBase64 -replace "/","_" -replace "\+","-" -replace "=", ""
+        
+        $now = (Get-Date).ToUniversalTime()
+        $nowUnixTimestamp = [Math]::Floor([decimal](Get-Date -Date $Now -UFormat "%s"))
+        $expirationUnixTimestamp = $nowUnixTimestamp + $expirationSeconds
+        $jwtClaimSet = @{
+            'iss'= $settings.ServiceAccount
+            'scope'= $scope
+            'aud'= 'https://oauth2.googleapis.com/token'
+            'exp'= $expirationUnixTimestamp
+            'iat'= $nowUnixTimestamp
+        } | ConvertTo-Json
+        
+        $jwtClaimSetBase64 = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($jwtClaimSet))
+        $jwtClaimSetBase64UrlEncoded = $jwtClaimSetBase64 -replace "/","_" -replace "\+","-" -replace "=", ""
+        
+        $stringToSign = $jwtHeaderBase64UrlEncoded + "." + $jwtClaimSetBase64UrlEncoded
+        $signatureBase64 = [Convert]::ToBase64String($rsaCryptoServiceProvider.SignData([System.Text.Encoding]::UTF8.GetBytes($stringToSign),"SHA256"))
+        $signatureBase64UrlEncoded = $signatureBase64 -replace "/","_" -replace "\+","-" -replace "=", ""
+        
+        $jwt = $jwtHeaderBase64UrlEncoded + "." + $jwtClaimSetBase64UrlEncoded + "." + $signatureBase64UrlEncoded
+        
+        $body = "grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=$jwt"
+    
+        try{
+            $accessToken = Invoke-RestMethod -Method Post -Uri "https://oauth2.googleapis.com/token" -ContentType "application/x-www-form-urlencoded" -Body $body | Select-Object -ExpandProperty access_token
+        }
+        catch{
+            Write-Log $_ -Verbose
+            Show-Alert -Title "Failed to retrieve access token. Please check logs for more details."
+            return
+        }
+        
+        return $accessToken
+    }
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20231014T222325Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\superuser
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\superuser
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "81490a04-fe4a-46a8-a4e9-e2a0e9b419a7"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\superuser
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20241010T214941Z

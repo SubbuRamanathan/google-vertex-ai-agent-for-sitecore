@@ -1,0 +1,51 @@
+﻿---
+ID: "a9c19b1f-0aa7-414c-a0f3-8c575fd2798a"
+Parent: "3d0e62bb-077e-4e18-9b70-fd7ec8bff0a2"
+Template: "dd22f1b3-bd87-4db2-9e7d-f7a496888d43"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Vertex AI Agent Builder/Event Handlers/Publish/End/Index Content in Data Store
+SharedFields:
+- ID: "1c76313e-3c8c-4807-a826-135d10c39299"
+  Hint: ShowRule
+  Value: 
+- ID: "b1a94ff0-6897-47c0-9c51-aa6acb80b1f0"
+  Hint: Script
+  Value: |
+    $publisher = $eventArgs.Parameters[0]
+    $publishOptions = $publisher.Options
+    
+    $scriptPath = "master:\system\Modules\PowerShell\Script Library\Vertex AI Agent Builder\Functions\Index-AllPublishedItems"
+    $args = @{
+        "PublishedItem" = $publishOptions.RootItem;
+        "IncludeSubItems" = $publishOptions.Deep
+    }
+    
+    Start-ScriptSession -Path $scriptPath -ArgumentList $args
+- ID: "f62c67b4-28b6-4a6f-91cb-db78cf054f4e"
+  Hint: EnableRule
+  Value: 
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20231014T211207Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\superuser
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\superuser
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "10bdcf85-29af-457e-8e9d-1c3c3f806249"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\superuser
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20241010T192917Z

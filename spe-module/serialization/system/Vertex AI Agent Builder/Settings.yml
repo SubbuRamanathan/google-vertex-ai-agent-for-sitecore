@@ -1,0 +1,58 @@
+﻿---
+ID: "466bdbb7-cc45-415c-a108-6807f68498ea"
+Parent: "0342a41f-6034-4f94-bbfd-83660b10150b"
+Template: "cd2f9578-21e0-4b38-a978-f5f2ee622e4c"
+Path: /sitecore/system/Modules/PowerShell/Script Library/Vertex AI Agent Builder/Settings
+SharedFields:
+- ID: "ba3f86a2-4a1c-4d78-b63d-91c2779c1b5e"
+  Hint: __Sortorder
+  Value: 300
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "0cf65bcb-29dc-46d9-ba56-669cd49a0171"
+      Hint: CertificateFileName
+      Value: "vertex-ai-demo-430916-eaf93bfafb17.p12"
+    - ID: "0f33947e-25bd-465d-b69c-053751416631"
+      Hint: Datastore
+      Value: engage_1722275055924
+    - ID: "0f5a9038-1486-4c12-877a-8399aa6c6f9c"
+      Hint: CertificatePassword
+      Value: notasecret
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20231101T153928Z
+    - ID: "52807595-0f8f-4b20-8d2a-cb71d28c6103"
+      Hint: __Owner
+      Value: |
+        sitecore\superuser
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\superuser
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "d9040231-9c01-4d95-884a-ba9d5906ab25"
+    - ID: "8d3eb391-826f-4183-97e6-5ed80a6f6fd1"
+      Hint: ServiceAccount
+      Value: "sitecore-connect@vertex-ai-demo-430916.iam.gserviceaccount.com"
+    - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
+      Hint: __Updated by
+      Value: |
+        sitecore\superuser
+    - ID: "cd150ce5-0c14-4750-9297-4f111952215f"
+      Hint: Templates
+      Value: |
+        {E255D331-AEA1-4F66-A5E7-4AB2E26408E0}
+        {14807D83-9671-4D70-B0F4-F54012F2BFB8}
+    - ID: "d91d6b7a-9ebe-4d9d-ac57-f4cb5182aa8d"
+      Hint: ContentFields
+      Value: Introduction|Content
+    - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
+      Hint: __Updated
+      Value: 20241010T202030Z
+    - ID: "e33579d9-510d-4162-90b9-c6a4b03f6a89"
+      Hint: Project
+      Value: "vertex-ai-demo-430916"
