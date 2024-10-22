@@ -13,13 +13,10 @@ SharedFields:
             [Item]$PublishedItem
         )
         
-        $regexToMatchOpeningHtmlTags = '<[^(>/)]*>'
-        $regexToMatchClosingHtmlTags = '(\.)?</[^>]*>'
-        
         $generalSettings = Get-Item -Path "master:" -ID "{466BDBB7-CC45-415C-A108-6807F68498EA}"
         $aggregatedContent = ''
         $generalSettings.ContentFields.Split('|') | Foreach-Object { 
-            $aggregatedContent += $PublishedItem.Fields[$_] -replace $regexToMatchOpeningHtmlTags, ''  -replace $regexToMatchClosingHtmlTags, '.' -replace '\n', ' ' -replace '"', '\"'
+            $aggregatedContent += $PublishedItem.Fields[$_] -replace '\n', ' ' -replace '"', '\"'
             if(-not $aggregatedContent.EndsWith('.')) { $aggregatedContent += '.' }
         }
         return $aggregatedContent
@@ -45,11 +42,11 @@ Languages:
         sitecore\superuser
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "0f772037-5c83-42b3-b20e-da49e1dbff1c"
+      Value: "3abae384-625c-4d0d-99ff-c350b24f3af9"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\superuser
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20231101T210215Z
+      Value: 20241021T165139Z

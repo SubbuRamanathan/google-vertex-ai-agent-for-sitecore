@@ -27,7 +27,7 @@ SharedFields:
             $documentId = $PublishedItem.ID.ToShortID()
             $branchId = $settings.Branch
             if($branchId -eq $null) { $branchId = '0' }  
-            $dataStoreApiUrl = "https://us-discoveryengine.googleapis.com/v1/projects/$($settings.Project)/locations/$($settings.Location)/collections/$($settings.Collection)/dataStores/$($settings.Datastore)/branches/$($branchId)/documents/$($documentId)?allowMissing=true"
+            $dataStoreApiUrl = "https://discoveryengine.googleapis.com/v1/projects/$($settings.Project)/locations/$($settings.Location)/collections/$($settings.Collection)/dataStores/$($settings.Datastore)/branches/$($branchId)/documents/$($documentId)?allowMissing=true"
             $headers = @{
                 Authorization="Bearer $(Get-AccessToken)"
             }
@@ -80,11 +80,11 @@ Languages:
         sitecore\superuser
     - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
       Hint: __Revision
-      Value: "c91a3d73-b534-43e7-8cf8-435fe64c0052"
+      Value: "dd7d4560-42b8-4f66-80cc-31e16bdb9bfa"
     - ID: "badd9cf9-53e0-4d0c-bcc0-2d784c282f6a"
       Hint: __Updated by
       Value: |
         sitecore\superuser
     - ID: "d9cf14b1-fa16-4ba6-9288-e8a174d4d522"
       Hint: __Updated
-      Value: 20241013T102037Z
+      Value: 20241013T124209Z
