@@ -6,8 +6,8 @@
       "request": "launch",
       "functionName": "perform-internet-search",
       "gen": "GEN_2",
-      "revision": "perform-internet-search-00015-muc",
-      "entryPoint": "search",
+      "revision": "perform-internet-search-00030-sar",
+      "entryPoint": "post",
       "testInput": "",
       "region": "us-central1",
       "runtime": "nodejs20"
