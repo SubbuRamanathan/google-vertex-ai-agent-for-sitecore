@@ -66,9 +66,8 @@ async function generateModelResponse(instruction, query, isPublicSearchGrounding
 };
 
 export const getPAIInfo = async (query, infoAgentResponse, credentials) => {
-    var months = ["jan", "feb", "mar", "apr", "may", "jun", "july", "aug", "sep", "oct", "nov", "dec"];
     let instruction = `You're an assistant that analyzes the user input question, identifies any elements that change periodically from the provided input(Eg, current inflation rate), and pulls the latest figures for those elements set by the Canadian government from the publicly available generic information. Do not share any recommendations or any other additional details.`;
-    let rewrittenQuery = `I'm a chatbot and here are the details from my website comprising of the services that we offer: '${infoAgentResponse}'. My user asked this '${query}'. Could you analyze the question for elements that change periodically and pull the latest figures for all of those identified dynamic elements for ${months[new Date().getMonth()]} ${new Date().getFullYear()} set by Canadian government from the publicly available generic information? Do not share any recommendations or any other additional details.`;
+    let rewrittenQuery = `I'm a chatbot and here are the details from my website comprising of the services that we offer: '${infoAgentResponse}'. My user asked this '${query}'. Could you analyze the question for elements that change periodically and pull the latest figures for all of those identified dynamic elements for ${new Date().getFullYear()} set by Canadian government from the publicly available generic information? Do not share any recommendations or any other additional details.`;
     return await generateModelResponse(instruction, rewrittenQuery, true, credentials);
 }
 
