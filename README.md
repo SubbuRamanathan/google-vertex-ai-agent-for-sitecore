@@ -27,8 +27,10 @@ This repository contains the Sitecore PowerShell & Sitecore Connect Modules for 
 * If you would like to leverage Google Search Grounding, it is important to note that Agent Builder doesn't support that by default, and hence, you may need to build a Google Cloud function or similar solution to handle such a scenario via OpenAPI tool in the Agent. This repository includes a [sample function app](https://github.com/SubbuRamanathan/google-vertex-ai-agent-for-sitecore/tree/main/function-app) which analyzes the user's question, fetches the Website Agent response(powered by Sitecore content), appends the Publicly Available Information from Gemini AI API call with Google Search Grounding enabled, summarize the response and returns the response to the user
 * Publish all content items necessary for the Chat/Search experience in Sitecore to populate the Data Store. You could publish the respective individual item or the parent item along with subitems for indexing
 * Once you have validated the agent responses, you could embed the agent to your website using the 'Publish agent' option located in the top right of the Agent Builder
-![Info Agent](https://raw.githubusercontent.com/SubbuRamanathan/google-vertex-ai-agent-for-sitecore/refs/heads/main/agent-builder/Info%20Agent%20-%20Vertex%20AI%20Agent%20Builder.png?token=GHSAT0AAAAAACV6LGGAX6YQ5JFTVKSTDM3YZY5GFHA)
-![Insights Agent](https://raw.githubusercontent.com/SubbuRamanathan/google-vertex-ai-agent-for-sitecore/refs/heads/main/agent-builder/Insights%20Agent%20-%20Vertex%20AI%20Agent%20Builder.png?token=GHSAT0AAAAAACV6LGGBXM3VZSFKAM72II32ZY5GGAQ)
+  
+![Info Agent](https://github.com/SubbuRamanathan/google-vertex-ai-agent-for-sitecore/blob/main/agent-builder/Info%20Agent%20-%20Vertex%20AI%20Agent%20Builder.png?raw=true)
+
+![Insights Agent](https://github.com/SubbuRamanathan/google-vertex-ai-agent-for-sitecore/blob/main/agent-builder/Insights%20Agent%20-%20Vertex%20AI%20Agent%20Builder.png?raw=true)
 
 ## To deploy, extend, or customize the SPE module for project-specific needs:
 * Clone SPE folder of this GitHub repository
