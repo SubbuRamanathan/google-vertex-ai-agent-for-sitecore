@@ -1,0 +1,1295 @@
+{
+  "name": "Index Content on Publish",
+  "description": "",
+  "version": 23,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_webhooks",
+    "name": "new_event",
+    "as": "10c4c058",
+    "title": null,
+    "description": "<span class=\"provider\">Index published content</span> via <span class=\"provider\">HTTP webhook</span>",
+    "keyword": "trigger",
+    "input": {
+      "request": {
+        "webhook_type": "json",
+        "payload_schema": "[{\"control_type\":\"text\",\"label\":\"Event name\",\"type\":\"string\",\"name\":\"EventName\"},{\"properties\":[{\"control_type\":\"text\",\"label\":\"Compare revisions\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Compare revisions\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"CompareRevisions\"},\"type\":\"boolean\",\"name\":\"CompareRevisions\"},{\"control_type\":\"text\",\"label\":\"Deep\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Deep\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"Deep\"},\"type\":\"boolean\",\"name\":\"Deep\"},{\"control_type\":\"text\",\"label\":\"From date\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"FromDate\"},{\"control_type\":\"text\",\"label\":\"Mode\",\"type\":\"string\",\"name\":\"Mode\"},{\"control_type\":\"text\",\"label\":\"Publish date\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"type\":\"date_time\",\"name\":\"PublishDate\"},{\"name\":\"PublishingTargets\",\"type\":\"array\",\"of\":\"string\",\"control_type\":\"text\",\"label\":\"Publishing targets\"},{\"control_type\":\"text\",\"label\":\"Republish all\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Republish all\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"RepublishAll\"},\"type\":\"boolean\",\"name\":\"RepublishAll\"},{\"control_type\":\"text\",\"label\":\"Recovery ID\",\"type\":\"string\",\"name\":\"RecoveryId\"},{\"control_type\":\"text\",\"label\":\"Source database name\",\"type\":\"string\",\"name\":\"SourceDatabaseName\"},{\"control_type\":\"text\",\"label\":\"Target database name\",\"type\":\"string\",\"name\":\"TargetDatabaseName\"},{\"control_type\":\"text\",\"label\":\"Root item ID\",\"type\":\"string\",\"name\":\"RootItemId\"},{\"control_type\":\"text\",\"label\":\"User name\",\"type\":\"string\",\"name\":\"UserName\"},{\"control_type\":\"text\",\"label\":\"Will be queued\",\"render_input\":{},\"parse_output\":{},\"toggle_hint\":\"Select from option list\",\"toggle_field\":{\"label\":\"Will be queued\",\"control_type\":\"text\",\"toggle_hint\":\"Use custom value\",\"type\":\"boolean\",\"name\":\"WillBeQueued\"},\"type\":\"boolean\",\"name\":\"WillBeQueued\"},{\"name\":\"Languages\",\"type\":\"array\",\"of\":\"string\",\"control_type\":\"text\",\"label\":\"Languages\"}],\"label\":\"Publisher options\",\"type\":\"object\",\"name\":\"PublisherOptions\"},{\"control_type\":\"text\",\"label\":\"Webhook item ID\",\"type\":\"string\",\"name\":\"WebhookItemId\"},{\"control_type\":\"text\",\"label\":\"Webhook item name\",\"type\":\"string\",\"name\":\"WebhookItemName\"}]",
+        "query_params": "[]",
+        "headers_schema": "[{\"control_type\":\"text\",\"label\":\"Content length\",\"type\":\"string\",\"name\":\"content_length\"},{\"control_type\":\"text\",\"label\":\"Content type\",\"type\":\"string\",\"name\":\"content_type\"},{\"control_type\":\"text\",\"label\":\"X amzn trace ID\",\"type\":\"string\",\"name\":\"x_amzn_trace_id\"},{\"control_type\":\"text\",\"label\":\"X correlation ID\",\"type\":\"string\",\"name\":\"x_correlation_id\"},{\"control_type\":\"text\",\"label\":\"X forwarded for\",\"type\":\"string\",\"name\":\"x_forwarded_for\"},{\"control_type\":\"text\",\"label\":\"X forwarded port\",\"type\":\"string\",\"name\":\"x_forwarded_port\"},{\"control_type\":\"text\",\"label\":\"X forwarded proto\",\"type\":\"string\",\"name\":\"x_forwarded_proto\"},{\"control_type\":\"text\",\"label\":\"X request ID\",\"type\":\"string\",\"name\":\"x_request_id\"}]"
+      },
+      "webhook_suffix": "Index Published Content"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Headers",
+        "name": "headers",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Content length",
+            "type": "string",
+            "name": "content_length"
+          },
+          {
+            "control_type": "text",
+            "label": "Content type",
+            "type": "string",
+            "name": "content_type"
+          },
+          {
+            "control_type": "text",
+            "label": "X amzn trace ID",
+            "type": "string",
+            "name": "x_amzn_trace_id"
+          },
+          {
+            "control_type": "text",
+            "label": "X correlation ID",
+            "type": "string",
+            "name": "x_correlation_id"
+          },
+          {
+            "control_type": "text",
+            "label": "X forwarded for",
+            "type": "string",
+            "name": "x_forwarded_for"
+          },
+          {
+            "control_type": "text",
+            "label": "X forwarded port",
+            "type": "string",
+            "name": "x_forwarded_port"
+          },
+          {
+            "control_type": "text",
+            "label": "X forwarded proto",
+            "type": "string",
+            "name": "x_forwarded_proto"
+          },
+          {
+            "control_type": "text",
+            "label": "X request ID",
+            "type": "string",
+            "name": "x_request_id"
+          }
+        ],
+        "type": "object"
+      },
+      {
+        "label": "Payload",
+        "name": "payload",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Event name",
+            "type": "string",
+            "name": "EventName"
+          },
+          {
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Compare revisions",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Compare revisions",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "type": "boolean",
+                  "name": "CompareRevisions"
+                },
+                "type": "boolean",
+                "name": "CompareRevisions"
+              },
+              {
+                "control_type": "text",
+                "label": "Deep",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Deep",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "type": "boolean",
+                  "name": "Deep"
+                },
+                "type": "boolean",
+                "name": "Deep"
+              },
+              {
+                "control_type": "text",
+                "label": "From date",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "type": "date_time",
+                "name": "FromDate"
+              },
+              {
+                "control_type": "text",
+                "label": "Mode",
+                "type": "string",
+                "name": "Mode"
+              },
+              {
+                "control_type": "text",
+                "label": "Publish date",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "type": "date_time",
+                "name": "PublishDate"
+              },
+              {
+                "name": "PublishingTargets",
+                "type": "array",
+                "of": "string",
+                "control_type": "text",
+                "label": "Publishing targets"
+              },
+              {
+                "control_type": "text",
+                "label": "Republish all",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Republish all",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "type": "boolean",
+                  "name": "RepublishAll"
+                },
+                "type": "boolean",
+                "name": "RepublishAll"
+              },
+              {
+                "control_type": "text",
+                "label": "Recovery ID",
+                "type": "string",
+                "name": "RecoveryId"
+              },
+              {
+                "control_type": "text",
+                "label": "Source database name",
+                "type": "string",
+                "name": "SourceDatabaseName"
+              },
+              {
+                "control_type": "text",
+                "label": "Target database name",
+                "type": "string",
+                "name": "TargetDatabaseName"
+              },
+              {
+                "control_type": "text",
+                "label": "Root item ID",
+                "type": "string",
+                "name": "RootItemId"
+              },
+              {
+                "control_type": "text",
+                "label": "User name",
+                "type": "string",
+                "name": "UserName"
+              },
+              {
+                "control_type": "text",
+                "label": "Will be queued",
+                "render_input": {
+                },
+                "parse_output": {
+                },
+                "toggle_hint": "Select from option list",
+                "toggle_field": {
+                  "label": "Will be queued",
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "type": "boolean",
+                  "name": "WillBeQueued"
+                },
+                "type": "boolean",
+                "name": "WillBeQueued"
+              },
+              {
+                "name": "Languages",
+                "type": "array",
+                "of": "string",
+                "control_type": "text",
+                "label": "Languages"
+              }
+            ],
+            "label": "Publisher options",
+            "type": "object",
+            "name": "PublisherOptions"
+          },
+          {
+            "control_type": "text",
+            "label": "Webhook item ID",
+            "type": "string",
+            "name": "WebhookItemId"
+          },
+          {
+            "control_type": "text",
+            "label": "Webhook item name",
+            "type": "string",
+            "name": "WebhookItemName"
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "extended_input_schema": [
+      {
+        "label": "Payload configuration",
+        "name": "request",
+        "override": true,
+        "properties": [
+          {
+            "control_type": "select",
+            "label": "Webhook type",
+            "pick_list": [
+              [
+                "GET request",
+                "get"
+              ],
+              [
+                "PUT/POST with JSON payload",
+                "json"
+              ],
+              [
+                "PUT/POST with XML payload",
+                "xml"
+              ],
+              [
+                "PUT/POST with FORM encoded payload",
+                "form"
+              ],
+              [
+                "PUT/POST with raw binary data",
+                "rawdata"
+              ],
+              [
+                "PUT/POST with unicode text data",
+                "rawdatatxt"
+              ]
+            ],
+            "hint": "Select the HTTP method and payload data type used by webhook. <a href=\"https://docs.workato.com/developing-connectors/http.html#set-up-your-non-oauth-2-0-connection\" target=\"_blank\">Learn more</a>",
+            "default": "json",
+            "extends_schema": true,
+            "type": "string",
+            "name": "webhook_type"
+          },
+          {
+            "control_type": "schema-designer",
+            "label": "Payload schema",
+            "sample_data_type": "json_http",
+            "extends_schema": true,
+            "empty_schema_title": "Describe all fields in your response.",
+            "optional": true,
+            "sticky": true,
+            "type": "string",
+            "name": "payload_schema"
+          },
+          {
+            "control_type": "schema-designer",
+            "label": "Query params",
+            "extends_schema": true,
+            "empty_schema_title": "Describe all the query params",
+            "optional": true,
+            "sticky": true,
+            "type": "string",
+            "name": "query_params"
+          },
+          {
+            "control_type": "schema-designer",
+            "label": "Headers",
+            "extends_schema": true,
+            "empty_schema_title": "Describe all the webhook headers",
+            "optional": true,
+            "sticky": true,
+            "type": "string",
+            "name": "headers_schema"
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "graph_ql_connector_2489818_1692744925",
+        "name": "query",
+        "as": "3117b214",
+        "title": null,
+        "description": "Query <span class=\"provider\">item</span> via <span class=\"provider\">GraphQL</span>",
+        "keyword": "action",
+        "toggleCfg": {
+          "field_fields.argument_ownFields": false,
+          "field_fields.argument_excludeStandardFields": true,
+          "field_url.argument_options.alwaysIncludeServerUrl": true
+        },
+        "input": {
+          "object": "item{}",
+          "nested_fields": "fields",
+          "field_fields": {
+            "argument_excludeStandardFields": "true",
+            "nested_fields": "nodes",
+            "field_nodes": {
+              "primitive_fields": "name,value"
+            },
+            "argument_ownFields": "true"
+          },
+          "field_url": {
+            "argument_options": {
+              "alwaysIncludeServerUrl": "true"
+            }
+          },
+          "primitive_fields": "url",
+          "argument_where": {
+            "itemId": "#{_dp('{\"pill_type\":\"output\",\"provider\":\"workato_webhooks\",\"line\":\"10c4c058\",\"path\":[\"payload\",\"PublisherOptions\",\"RootItemId\"]}')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "Url",
+            "name": "url",
+            "optional": true,
+            "type": "string"
+          },
+          {
+            "label": "Fields",
+            "name": "fields",
+            "optional": true,
+            "properties": [
+              {
+                "name": "nodes",
+                "type": "array",
+                "of": "object",
+                "label": "Nodes",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "optional": true,
+                    "type": "string",
+                    "name": "name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Value",
+                    "optional": true,
+                    "type": "string",
+                    "name": "value"
+                  }
+                ]
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "control_type": "select",
+            "extends_schema": true,
+            "hint": "Select records to retrieve, e.g. archived item",
+            "label": "Query",
+            "name": "object",
+            "optional": false,
+            "pick_list": [
+              [
+                "Archived item",
+                "archivedItem{}"
+              ],
+              [
+                "Archived items",
+                "archivedItems"
+              ],
+              [
+                "Databases",
+                "databases{}"
+              ],
+              [
+                "Data source templates",
+                "dataSourceTemplates{}"
+              ],
+              [
+                "Domain",
+                "domain{}"
+              ],
+              [
+                "Domains",
+                "domains{}"
+              ],
+              [
+                "Fallback language",
+                "fallbackLanguage{}"
+              ],
+              [
+                "Index",
+                "index{}"
+              ],
+              [
+                "Indexes",
+                "indexes{}"
+              ],
+              [
+                "Is job queued",
+                "isJobQueued"
+              ],
+              [
+                "Is job running",
+                "isJobRunning"
+              ],
+              [
+                "Item",
+                "item{}"
+              ],
+              [
+                "Item template",
+                "itemTemplate{}"
+              ],
+              [
+                "Item templates",
+                "itemTemplates{}"
+              ],
+              [
+                "Job",
+                "job{}"
+              ],
+              [
+                "Jobs",
+                "jobs{}"
+              ],
+              [
+                "Language",
+                "language{}"
+              ],
+              [
+                "Language item",
+                "languageItem{}"
+              ],
+              [
+                "Languages",
+                "languages{}"
+              ],
+              [
+                "Media item",
+                "mediaItem{}"
+              ],
+              [
+                "Meta",
+                "meta{}"
+              ],
+              [
+                "Page branches roots",
+                "pageBranchesRoots"
+              ],
+              [
+                "Page designs",
+                "pageDesigns"
+              ],
+              [
+                "Page designs roots",
+                "pageDesignsRoots"
+              ],
+              [
+                "Parse rule",
+                "parseRule{}"
+              ],
+              [
+                "Parse rule set",
+                "parseRuleSet{}"
+              ],
+              [
+                "Partial designs",
+                "partialDesigns"
+              ],
+              [
+                "Partial designs roots",
+                "partialDesignsRoots"
+              ],
+              [
+                "Publishing status",
+                "publishingStatus{}"
+              ],
+              [
+                "Publishing targets",
+                "publishingTargets"
+              ],
+              [
+                "Role",
+                "role{}"
+              ],
+              [
+                "Roles",
+                "roles{}"
+              ],
+              [
+                "Rule",
+                "rule{}"
+              ],
+              [
+                "Rule set",
+                "ruleSet{}"
+              ],
+              [
+                "Rule template",
+                "ruleTemplate{}"
+              ],
+              [
+                "Search",
+                "search{}"
+              ],
+              [
+                "Selection profiles",
+                "selectionProfiles{}"
+              ],
+              [
+                "Site",
+                "site{}"
+              ],
+              [
+                "Site collections",
+                "siteCollections"
+              ],
+              [
+                "Sites",
+                "sites"
+              ],
+              [
+                "Solution sites",
+                "solutionSites"
+              ],
+              [
+                "Solution templates",
+                "solutionTemplates"
+              ],
+              [
+                "Supported languages",
+                "supportedLanguages{}"
+              ],
+              [
+                "Tenant templates",
+                "tenantTemplates"
+              ],
+              [
+                "User",
+                "user{}"
+              ],
+              [
+                "Users",
+                "users{}"
+              ],
+              [
+                "Workflow",
+                "workflow{}"
+              ],
+              [
+                "Workflows",
+                "workflows{}"
+              ]
+            ],
+            "type": "string",
+            "schema_neutral": false
+          },
+          {
+            "hint": "Represents an item query.",
+            "label": "Where",
+            "name": "argument_where",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Database",
+                "optional": true,
+                "hint": "The name of the database where item exits.",
+                "type": "string",
+                "name": "database"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Existing version only",
+                "parse_output": "float_conversion",
+                "optional": true,
+                "toggle_hint": "Pick value",
+                "toggle_field": {
+                  "type": "boolean",
+                  "control_type": "text",
+                  "convert_input": "boolean_conversion",
+                  "toggle_hint": "Provide value",
+                  "optional": true,
+                  "name": "existingVersionOnly",
+                  "label": "Existing version only"
+                },
+                "hint": "Indicates whether to return the item even if the requested version does not exist.",
+                "render_input": "boolean_conversion",
+                "type": "number",
+                "name": "existingVersionOnly"
+              },
+              {
+                "control_type": "text",
+                "label": "Item ID",
+                "optional": true,
+                "hint": "The item ID. If both ID and path parameters are specified, the path parameter is ignored.",
+                "type": "string",
+                "name": "itemId"
+              },
+              {
+                "control_type": "text",
+                "label": "Language",
+                "optional": true,
+                "hint": "The item language.",
+                "type": "string",
+                "name": "language"
+              },
+              {
+                "control_type": "text",
+                "label": "Path",
+                "optional": true,
+                "hint": "The full item path. If both ID and path parameters are specified, the path parameter is ignored.",
+                "type": "string",
+                "name": "path"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Require presentation",
+                "parse_output": "float_conversion",
+                "optional": true,
+                "toggle_hint": "Pick value",
+                "toggle_field": {
+                  "type": "boolean",
+                  "control_type": "text",
+                  "convert_input": "boolean_conversion",
+                  "toggle_hint": "Provide value",
+                  "optional": true,
+                  "name": "requirePresentation",
+                  "label": "Require presentation"
+                },
+                "hint": "DEPRECATED. Indicates whether the item required must have presentation.",
+                "render_input": "boolean_conversion",
+                "type": "number",
+                "name": "requirePresentation"
+              },
+              {
+                "control_type": "integer",
+                "label": "Version",
+                "parse_output": "integer_conversion",
+                "optional": true,
+                "hint": "The version number of the item.",
+                "render_input": "integer_conversion",
+                "type": "integer",
+                "name": "version"
+              }
+            ],
+            "type": "object"
+          },
+          {
+            "control_type": "multiselect",
+            "delimiter": ",",
+            "extends_schema": true,
+            "hint": "Select the fields that must be retrieved to improve performance. All fields are returned if left blank.",
+            "label": "Fields to retrieve",
+            "name": "primitive_fields",
+            "optional": true,
+            "pick_list": [
+              [
+                "Database",
+                "database"
+              ],
+              [
+                "Display name",
+                "displayName"
+              ],
+              [
+                "Has children",
+                "hasChildren"
+              ],
+              [
+                "Has presentation",
+                "hasPresentation"
+              ],
+              [
+                "Icon",
+                "icon"
+              ],
+              [
+                "Item ID",
+                "itemId"
+              ],
+              [
+                "Item uri",
+                "itemUri"
+              ],
+              [
+                "Name",
+                "name"
+              ],
+              [
+                "Path",
+                "path"
+              ],
+              [
+                "Thumbnail url",
+                "thumbnailUrl"
+              ],
+              [
+                "Url",
+                "url"
+              ],
+              [
+                "Version",
+                "version"
+              ],
+              [
+                "Version name",
+                "versionName"
+              ]
+            ],
+            "type": "string",
+            "schema_neutral": false
+          },
+          {
+            "label": "Url",
+            "name": "field_url",
+            "optional": true,
+            "properties": [
+              {
+                "properties": [
+                  {
+                    "control_type": "checkbox",
+                    "label": "Always include server url",
+                    "parse_output": "float_conversion",
+                    "optional": true,
+                    "toggle_hint": "Pick value",
+                    "toggle_field": {
+                      "type": "boolean",
+                      "control_type": "text",
+                      "convert_input": "boolean_conversion",
+                      "toggle_hint": "Provide value",
+                      "optional": true,
+                      "name": "alwaysIncludeServerUrl",
+                      "label": "Always include server url"
+                    },
+                    "hint": "Indicates whether to include the server URL for an absolute URL path. Otherwise, a relative path will be generated.",
+                    "render_input": "boolean_conversion",
+                    "type": "number",
+                    "name": "alwaysIncludeServerUrl"
+                  },
+                  {
+                    "control_type": "checkbox",
+                    "label": "Disable language embedding",
+                    "parse_output": "float_conversion",
+                    "optional": true,
+                    "toggle_hint": "Pick value",
+                    "toggle_field": {
+                      "type": "boolean",
+                      "control_type": "text",
+                      "convert_input": "boolean_conversion",
+                      "toggle_hint": "Provide value",
+                      "optional": true,
+                      "name": "disableLanguageEmbedding",
+                      "label": "Disable language embedding"
+                    },
+                    "hint": "Indicates whether to disable language embedding. To disable embedding the language in the URL path, set the value to true.",
+                    "render_input": "boolean_conversion",
+                    "type": "number",
+                    "name": "disableLanguageEmbedding"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Language",
+                    "optional": true,
+                    "hint": "The language to use in the generated URL.",
+                    "type": "string",
+                    "name": "language"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Site name",
+                    "optional": true,
+                    "hint": "The site name to use for generating URL.",
+                    "type": "string",
+                    "name": "siteName"
+                  }
+                ],
+                "label": "Options",
+                "optional": true,
+                "hint": "Represents an item query.",
+                "type": "object",
+                "name": "argument_options"
+              }
+            ],
+            "type": "object"
+          },
+          {
+            "control_type": "multiselect",
+            "delimiter": ",",
+            "extends_schema": true,
+            "hint": "Select related records to retrieve",
+            "label": "Sub queries",
+            "name": "nested_fields",
+            "optional": true,
+            "pick_list": [
+              [
+                "Access",
+                "access"
+              ],
+              [
+                "Ancestors",
+                "ancestors"
+              ],
+              [
+                "Children",
+                "children"
+              ],
+              [
+                "Field",
+                "field"
+              ],
+              [
+                "Fields",
+                "fields"
+              ],
+              [
+                "Insert options",
+                "insertOptions"
+              ],
+              [
+                "Language",
+                "language"
+              ],
+              [
+                "Lock",
+                "lock"
+              ],
+              [
+                "Parent",
+                "parent"
+              ],
+              [
+                "Publish",
+                "publish"
+              ],
+              [
+                "Template",
+                "template"
+              ],
+              [
+                "Versions",
+                "versions"
+              ],
+              [
+                "Workflow",
+                "workflow"
+              ]
+            ],
+            "sticky": true,
+            "type": "string",
+            "schema_neutral": false
+          },
+          {
+            "hint": "Provides access to the fields of the item.",
+            "label": "Fields",
+            "name": "field_fields",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "After",
+                "optional": true,
+                "type": "string",
+                "name": "argument_after"
+              },
+              {
+                "control_type": "text",
+                "label": "Before",
+                "optional": true,
+                "type": "string",
+                "name": "argument_before"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Exclude standard fields",
+                "parse_output": "float_conversion",
+                "optional": false,
+                "toggle_hint": "Pick value",
+                "toggle_field": {
+                  "type": "boolean",
+                  "control_type": "text",
+                  "convert_input": "boolean_conversion",
+                  "toggle_hint": "Provide value",
+                  "optional": false,
+                  "name": "argument_excludeStandardFields",
+                  "label": "Exclude standard fields"
+                },
+                "render_input": "boolean_conversion",
+                "type": "number",
+                "name": "argument_excludeStandardFields"
+              },
+              {
+                "control_type": "text",
+                "label": "First",
+                "optional": true,
+                "type": "string",
+                "name": "argument_first"
+              },
+              {
+                "control_type": "text",
+                "label": "Last",
+                "optional": true,
+                "type": "string",
+                "name": "argument_last"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Own fields",
+                "parse_output": "float_conversion",
+                "optional": false,
+                "toggle_hint": "Pick value",
+                "toggle_field": {
+                  "type": "boolean",
+                  "control_type": "text",
+                  "convert_input": "boolean_conversion",
+                  "toggle_hint": "Provide value",
+                  "optional": false,
+                  "name": "argument_ownFields",
+                  "label": "Own fields"
+                },
+                "render_input": "boolean_conversion",
+                "type": "number",
+                "name": "argument_ownFields"
+              },
+              {
+                "control_type": "multiselect",
+                "label": "Sub queries",
+                "hint": "Select related records to retrieve",
+                "pick_list": [
+                  [
+                    "Edges",
+                    "edges"
+                  ],
+                  [
+                    "Nodes",
+                    "nodes"
+                  ],
+                  [
+                    "Page info",
+                    "pageInfo"
+                  ]
+                ],
+                "extends_schema": true,
+                "schema_neutral": false,
+                "optional": true,
+                "sticky": true,
+                "delimiter": ",",
+                "type": "string",
+                "name": "nested_fields"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "multiselect",
+                    "label": "Fields to retrieve",
+                    "hint": "Select the fields that must be retrieved to improve performance. All fields are returned if left blank.",
+                    "pick_list": [
+                      [
+                        "Contains inherited value",
+                        "containsInheritedValue"
+                      ],
+                      [
+                        "Contains standard value",
+                        "containsStandardValue"
+                      ],
+                      [
+                        "Field ID",
+                        "fieldId"
+                      ],
+                      [
+                        "Name",
+                        "name"
+                      ],
+                      [
+                        "Value",
+                        "value"
+                      ]
+                    ],
+                    "extends_schema": true,
+                    "schema_neutral": false,
+                    "optional": true,
+                    "delimiter": ",",
+                    "type": "string",
+                    "name": "primitive_fields"
+                  },
+                  {
+                    "control_type": "multiselect",
+                    "label": "Sub queries",
+                    "hint": "Select related records to retrieve",
+                    "pick_list": [
+                      [
+                        "Access",
+                        "access"
+                      ],
+                      [
+                        "Template field",
+                        "templateField"
+                      ],
+                      [
+                        "Validation",
+                        "validation"
+                      ]
+                    ],
+                    "extends_schema": true,
+                    "schema_neutral": false,
+                    "optional": true,
+                    "sticky": true,
+                    "delimiter": ",",
+                    "type": "string",
+                    "name": "nested_fields"
+                  }
+                ],
+                "label": "Nodes",
+                "hint": "A flattened list of the nodes.",
+                "optional": true,
+                "type": "object",
+                "name": "field_nodes"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "object",
+          "nested_fields",
+          "field_fields",
+          "field_fields.argument_excludeStandardFields",
+          "field_fields.argument_ownFields",
+          "field_fields.nested_fields",
+          "field_fields.field_edges.nested_fields",
+          "field_fields.field_nodes.nested_fields",
+          "field_url.argument_options.alwaysIncludeServerUrl",
+          "primitive_fields",
+          "argument_where.itemId",
+          "argument_where",
+          "field_url",
+          "field_url.argument_options",
+          "field_fields.field_nodes",
+          "field_fields.field_nodes.primitive_fields"
+        ],
+        "uuid": "bfd6f7b2-3c5a-47c3-b43a-715144b5aecf"
+      },
+      {
+        "number": 2,
+        "provider": "vertex_ai_search_connector_2489818_1722309729",
+        "name": "import_document",
+        "as": "724ebccd",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "input": {
+          "Document": {
+            "content": {
+              "mimeType": "text/html",
+              "rawBytes": "=_dp('{\"pill_type\":\"output\",\"provider\":\"graph_ql_connector_2489818_1692744925\",\"line\":\"3117b214\",\"path\":[\"fields\",\"nodes\"]}').where(name: \"ShortDescription\").first['value'].encode_base64"
+            },
+            "name": "=_dp('{\"pill_type\":\"output\",\"provider\":\"graph_ql_connector_2489818_1692744925\",\"line\":\"3117b214\",\"path\":[\"fields\",\"nodes\"]}').where(name: \"Title\").first['value']",
+            "id": "#{_dp('{\"pill_type\":\"output\",\"provider\":\"workato_webhooks\",\"line\":\"10c4c058\",\"path\":[\"payload\",\"PublisherOptions\",\"RootItemId\"]}')}",
+            "structData": {
+              "title": "=_dp('{\"pill_type\":\"output\",\"provider\":\"graph_ql_connector_2489818_1692744925\",\"line\":\"3117b214\",\"path\":[\"fields\",\"nodes\"]}').where(name: \"Title\").first['value']",
+              "link": "#{_dp('{\"pill_type\":\"output\",\"provider\":\"graph_ql_connector_2489818_1692744925\",\"line\":\"3117b214\",\"path\":[\"url\"]}')}"
+            }
+          },
+          "DocumentID": "#{_dp('{\"pill_type\":\"output\",\"provider\":\"workato_webhooks\",\"line\":\"10c4c058\",\"path\":[\"payload\",\"PublisherOptions\",\"RootItemId\"]}')}"
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "Name",
+            "name": "name",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "control_type": "text",
+            "label": "ID",
+            "name": "id",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "hint": "The structured data for the document (used by the agent as a reference for citations)",
+            "label": "Struct data",
+            "name": "structData",
+            "optional": false,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Title",
+                "optional": false,
+                "type": "string",
+                "name": "title"
+              },
+              {
+                "control_type": "text",
+                "label": "Link",
+                "optional": false,
+                "type": "string",
+                "name": "link"
+              }
+            ],
+            "type": "object"
+          },
+          {
+            "hint": "The unstructured content used for generating agent responses",
+            "label": "Content",
+            "name": "content",
+            "optional": false,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Mime type",
+                "default": "text/html",
+                "optional": false,
+                "type": "string",
+                "name": "mimeType"
+              },
+              {
+                "control_type": "text",
+                "label": "Raw bytes",
+                "hint": "Base64 encoded version of the content to be used by agent for generating responses",
+                "optional": false,
+                "type": "string",
+                "name": "rawBytes"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "control_type": "text",
+            "label": "Document ID",
+            "name": "DocumentID",
+            "optional": false,
+            "type": "string"
+          },
+          {
+            "label": "Document",
+            "name": "Document",
+            "optional": false,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Name",
+                "optional": false,
+                "type": "string",
+                "name": "name"
+              },
+              {
+                "control_type": "text",
+                "label": "ID",
+                "optional": false,
+                "type": "string",
+                "name": "id"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Title",
+                    "optional": false,
+                    "type": "string",
+                    "name": "title"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Link",
+                    "optional": false,
+                    "type": "string",
+                    "name": "link"
+                  }
+                ],
+                "label": "Struct data",
+                "optional": false,
+                "hint": "The structured data for the document (used by the agent as a reference for citations)",
+                "type": "object",
+                "name": "structData"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Mime type",
+                    "default": "text/html",
+                    "optional": false,
+                    "type": "string",
+                    "name": "mimeType"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Raw bytes",
+                    "hint": "Base64 encoded version of the content to be used by agent for generating responses",
+                    "optional": false,
+                    "type": "string",
+                    "name": "rawBytes"
+                  }
+                ],
+                "label": "Content",
+                "optional": false,
+                "hint": "The unstructured content used for generating agent responses",
+                "type": "object",
+                "name": "content"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "uuid": "7f5dbded-28a8-4792-a3ab-7ec3d9f4c5b9"
+      }
+    ],
+    "uuid": "3018cb4c-1996-40e6-9cad-10ed5d7fba09",
+    "wizardFinished": true,
+    "unfinished": false
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_webhooks",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "graph_ql_connector_2489818_1692744925",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "Connections/xm_cloud.connection.json",
+        "name": "XM Cloud",
+        "folder": "Connections",
+        "custom": true
+      }
+    },
+    {
+      "keyword": "application",
+      "provider": "vertex_ai_search_connector_2489818_1722309729",
+      "skip_validation": false,
+      "account_id": {
+        "zip_name": "vertex_ai_agent_builder_connection.connection.json",
+        "name": "Vertex AI Agent Builder Connection",
+        "folder": "",
+        "custom": true
+      }
+    }
+  ]
+}
