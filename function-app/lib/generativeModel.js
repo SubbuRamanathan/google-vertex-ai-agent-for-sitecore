@@ -71,10 +71,10 @@ export const getPAIInfo = async (query, infoAgentResponse, credentials) => {
     return await generateModelResponse(instruction, rewrittenQuery, true, credentials);
 }
 
-export const prepareUserResponse = async (query, paiInfo, infoAgentResponse, credentials) => {
+export const prepareAgentResponse = async (query, paiInfo, infoAgentResponse, credentials) => {
     let instruction = `You're an assistant that analyzes the user input question, combine the website data and internet search data to generate a response for the user.`;
     let prompt = `Here are the details from my website: ${infoAgentResponse} | Here is the most up-to-date accurate information from my Internet Search in Canada: ${paiInfo} | Here's the user's question: ${query}? As a financial consultant, could you combine the above website & internet search data to generate a response for the user. Do not include any information outside of the above provided website data and internet search data. Do not include any summary of the original question/ask, so I can copy paste the response to the user directly without any edit.`
     return await generateModelResponse(instruction, prompt, false, credentials);
 }
 
-export default { getPAIInfo, prepareUserResponse };
+export default { getPAIInfo, prepareAgentResponse };

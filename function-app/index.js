@@ -1,5 +1,5 @@
 import { generateResponse } from './lib/knowledgeBase.js';
-import { getPAIInfo, prepareUserResponse } from './lib/generativeModel.js';
+import { getPAIInfo, prepareAgentResponse } from './lib/generativeModel.js';
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
@@ -15,7 +15,7 @@ functions.http('post', async (req, res) => {
     let infoAgentResponse = await generateResponse(sessionId, query, credentials);
     let paiInfo = await getPAIInfo(query, infoAgentResponse, credentials);
 
-    let modelResponse = await prepareUserResponse(query, paiInfo, infoAgentResponse, credentials);
+    let modelResponse = await prepareAgentResponse(query, paiInfo, infoAgentResponse, credentials);
     let finalResponse = {
         agent_response: modelResponse
     };

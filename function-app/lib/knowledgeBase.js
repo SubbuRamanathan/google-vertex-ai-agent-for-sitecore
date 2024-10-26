@@ -6,6 +6,7 @@ const { SessionsClient } = require('@google-cloud/dialogflow-cx').v3;
 const languageCode = 'en-US';
 const location = 'global';
 const agentId = '1257da63-f102-49ca-97ec-0a9fa94ee8b9';
+const kbPlaybookId = '00000000-0000-0000-0000-000000000000';
 
 export const generateResponse = async (sessionId, query, credentials) => {
     const projectId = credentials.project_id;
@@ -33,7 +34,7 @@ export const generateResponse = async (sessionId, query, credentials) => {
         },
         queryParams: {
             llmModelSettings: { model: "gemini-1.5-flash" },
-            playbookStateOverride: {currentSessionTrace: {actions:[], name:"projects/vertex-ai-demo-430916/locations/global/agents/1257da63-f102-49ca-97ec-0a9fa94ee8b9/playbooks/00000000-0000-0000-0000-000000000000/examples/-"}}
+            playbookStateOverride: {currentSessionTrace: {actions:[], name:`projects/${credentials.project_id}/locations/${location}/agents/${agentId}/playbooks/${kbPlaybookId}/examples/-`}}
         }
     };
 
